@@ -95,7 +95,7 @@ function draw() {
       towers.scale = 0.5;
       console.log(towers.y);
       towers.lifetime = 240;
-      towersGroup.collide(ground)
+      //towersGroup.collide(ground)
       towersGroup.add(towers);  
       
     

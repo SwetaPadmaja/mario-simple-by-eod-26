@@ -91,7 +91,7 @@ function draw() {
   
       }
       
-    //  towers.velocityX = -1;
+     towers.velocityX = -3;
       towers.scale = 0.5;
       console.log(towers.y);
       towers.lifetime = 240;

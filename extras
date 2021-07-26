@@ -1,0 +1,121 @@
+var player;
+var tower1, tower2;
+var edges;
+var hit = false;
+var hit2 = false;
+var gameState="start";
+
+
+function setup(){
+
+    createCanvas(800,800);
+    player=createSprite(300,300,50,50);
+    player.shapeColor="red";
+    rectMode(CENTER)
+tower1= createSprite(500,800,100,600);
+tower1.shapeColor="green";
+tower2= createSprite(700,800,100,600);
+tower2.shapeColor="green";
+
+}
+
+function draw(){
+background(200);
+text(mouseX+","+mouseY, mouseX, mouseY)
+edges= createEdgeSprites();
+//camera.position.y=player.y; 
+/*if(keyCode===38){
+    bounceTower();
+}*/ 
+
+ if(gameState==="start")
+{
+    bounceTower();
+}
+    
+
+
+
+
+ /*var d = dist(player.x,player.y+player.height/2,tower1.x,tower1.y-(tower1.height/2));
+ var d1=dist(player.x+player.width/2,player.y,tower1.x-tower1.width/2,tower1.y);
+ var d2=dist(player.x,player.y,tower1.x,tower1.y)
+/*if(player.x < tower1.x + tower1.width &&
+    player.x + player.width > tower1.x &&
+    player.y < tower1.y + tower1.height &&
+    player.y + player.height > tower1.y) 
+     // collision detected!
+ if(d===0||d<25|| d1===0||d1<20||d2===0||d2<30)*/
+ hit= collideLineRect(450,500,550,500,player.x,player.y,50,50);
+  hit2=collideLineRect(650,500,750,500,player.x,player.y,50,50)
+//console.log("hit"+hit);
+//console.log("hit2"+hit2);
+ if(hit===true || hit2===true )
+{
+
+    /*player.y=tower1.y+tower1.height/2;
+    player.velocityY=0;
+    player.velocityX=0;*/
+   // gameState="halt" ;
+    player.velocityY=0;
+    player.velocityX=0;
+    gameState="halt";
+
+  
+  if(keyIsDown(39)){//right
+     player.x=player.x+2;
+   }
+   if(keyIsDown(38)){//up
+      player.y=player.y-2;
+   // player.velocityY=player.velocityY+0.5;
+    }
+  /*if(keyIsDown(40)){//down
+    player.y=player.y+2;
+   }*/
+   if(keyIsDown(37)){
+    player.x=player.x-2;
+   }
+    if(keyIsDown(32) && gameState=="halt")
+    {
+     bounceTower();
+    }
+}
+//player.bounceOff(edges[2], scollided);
+//console.log(player.x,player.y);
+
+drawSprites();
+}
+
+function scollided(){
+    player.shapeColor="blue";
+    player.velocityX=0;
+    player.velocityY=0;
+    /*if(player.isTouching(edges[2])){
+        player.velocityY=4;
+    }*/ 
+}
+
+function bounceTower()
+{
+    if(keyIsDown(32) /* && gameState=="halt" */ ){
+      //  gameState="jump";
+        gameState="start";
+        player.velocityX=5;
+        player.velocityY=-5;
+       
+    
+    }
+    else if(hit2===false && hit== false){
+        player.velocityY= player.velocityY+0.8;
+    } //if(!keyIsDown(32))
+    
+       
+
+    
+      //else if(!(keyDown(39) || !(keyDown(37) ||!(keyDown(38)) || !(keyIsDown(40))))){
+       
+    //}
+}
+
+
+
